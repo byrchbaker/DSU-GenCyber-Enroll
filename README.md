@@ -31,5 +31,12 @@ Makeshift Installation:
 3. py main.py
 
 4. Enjoy.
-   
+
+Intended Result:
+![image](https://github.com/byrchbaker/DSU-GenCyber-Enroll/assets/62627217/2b30d646-7a35-4705-8e9e-f2e23b54eb47)
+
+
+
+
+
 Copyright 2024 © Byrch Baker
