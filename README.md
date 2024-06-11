@@ -1,6 +1,6 @@
-# DSU GenCyber Auto Elective Script/App
+# DSU GenCyber Auto Elective Script
 
-### I'm pretty much done developing this script for the 2023 GenCyber DSU camp. I will maybe make a web app and make it a little bit more pretty in 2024/2025.
+### I'm pretty much done developing this script for the GenCyber DSU camp. If I attend the camp in 2025, I will update it to be in a web portal.
 
 What Does It Do?
   - This script allows the user to select their desired electives for the next elective phase in the Dakota State University GenCyber Camp. Then it automatically waits for the electives to open (usually either 7:30 AM or 6:30 AM). At the exact elective time, it registers all the electives for the user, assuming the user is sleep ;)
@@ -8,12 +8,28 @@ What Does It Do?
 Why?
   - I was tired that all the electives would fill up immediately at 6:35-40 and I too wanted the best electives so I made this to combat that.
 
-Installation:
+Prerequisites:
 
-1. git clone https://github.com/byrchbaker/DSU-GenCyber.git
+1. Go to https://go.gencyber.camp/login
+2. Press "Remember Me"
+3. Enter login credentials.
+   3.5. Username and password should be information card given at the beginning of camp.
+4. Log In!
+5. CLOSE ALL GOOGLE CHROME BROWSER SESSIONS!
 
-2. python -m pip install -r requirements.txt
+Info:
 
-3. python main.py
+All google chrome browser sessions should be closed while the script is running. 
+Laptop should not go to sleep while the script is running. 
 
-Copyright 2023 © Byrch Baker
+Makeshift Installation:
+
+1. Git clone or download: https://github.com/byrchbaker/DSU-GenCyber
+
+2. Get-Item requirements.txt | Get-Content | % {$p= $_.split(); py -m pip install $p}
+
+3. py main.py
+
+4. Enjoy.
+   
+Copyright 2024 © Byrch Baker
