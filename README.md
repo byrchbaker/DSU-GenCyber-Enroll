@@ -3,7 +3,7 @@
 ### I'm pretty much done developing this script for the GenCyber DSU camp. If I attend the camp in 2025, I will update it to be in a web portal.
 
 What Does It Do?
-  - This script allows the user to select their desired electives for the next elective phase in the Dakota State University GenCyber Camp. Then it automatically waits for the electives to open (usually either 7:30 AM or 6:30 AM). At the exact elective time, it registers all the electives for the user, assuming the user is sleep ;)
+  - This script allows the user to select their desired electives for the next elective phase in the Dakota State University GenCyber Camp. Then it automatically waits for the electives to open (usually either 7:30 AM OR 9:45 PM). At the exact elective time, it registers all the electives for the user, assuming the user is sleeping ;)
 
 Why?
   - I was tired that all the electives would fill up immediately at 6:35-40 and I too wanted the best electives so I made this to combat that.
