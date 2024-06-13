@@ -1,8 +1,10 @@
 # import some stuff
 import subprocess
-import requests, pytz, time, browser_cookie3, psutil, sys
+import requests, pytz, time, browser_cookie3, psutil, sys, urllib3
+from render_html import render_in_browser
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
+
 
 # Define the URLs for each period
 period_urls = [
@@ -36,7 +38,7 @@ def clear_console():
         _ = subprocess.call(command, shell=True)
 
 
-def getRememberCookie(domain='go.gencyber.camp',cookieName='remember_token'):
+def getRememberCookie(domain='go.gencyber.camp', cookieName='remember_token'):
 
     Cookies={}
     chromeCookies = list(browser_cookie3.chrome())
@@ -57,7 +59,10 @@ def check_login_credentials():
     
     url = "https://go.gencyber.camp/completions"
 
+    headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.28 Safari/537.36'}
+
     session = requests.Session()
+    session.headers = headers
     session.cookies.set("remember_token", getRememberCookie())
 
     response = session.get(url)
@@ -79,15 +84,15 @@ def parse_elective_info(html):
     electives = []
 
     for article in articles:
-        # ill never be doing this again
         name = article.find("h2").text.strip()
         description = article.find("p", class_="article-content").text.strip().replace("Description: ", "")
         instructor = article.find("a", class_="mr-2").text.strip()
         location = article.find_all("p", class_="article-content")[1].text.strip().replace("Location: ", "")
-        url = article.find("button", class_="btn btn-outline-success")["onclick"].replace("window.location.href = '", "").replace("'", "")
+        url = article.find("a", class_="btn btn-outline-success")["href"]
         electives.append({"name": name, "description": description, "instructor": instructor, "location": location, "url": url})
 
     return electives
+
 
 
 # Function to register for an elective using the provided URL
@@ -95,7 +100,10 @@ def register_for_elective(url):
     base_url = "https://go.gencyber.camp"
     register_url = base_url + url
     
+    headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.28 Safari/537.36'}
+
     session = requests.Session()
+    session.headers = headers
     session.cookies.set("remember_token", getRememberCookie())
     
     response = session.get(register_url)
@@ -111,16 +119,19 @@ def register_for_elective(url):
 
 # Function to countdown to a specific time
 def countdown_to_time():
+
     while True:
-        # Send GET request to the API
-        response = requests.get("https://go.gencyber.camp/api/regtime")
-        
+
+        response = requests.get("https://go.gencyber.camp/api/regtime", headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.28 Safari/537.36'})
+
+
         # Check if the request was successful
         if response.status_code == 200:
+
             # Parse the JSON response
             data = response.json()
             starttime = data.get("starttime")
-            
+
             # Convert the start time to a datetime object
             start_datetime = datetime.strptime(starttime, "%Y-%m-%d %H:%M:%S")
             
@@ -163,7 +174,7 @@ if __name__ == "__main__":
     check_login_credentials()
     
     for i, period_url in enumerate(period_urls, start=1):
-        response = requests.get(period_url)
+        response = requests.get(period_url, headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.28 Safari/537.36'})
         if response.ok:
             electives = parse_elective_info(response.text)
             print(f"\nElectives for Period {i}:")
